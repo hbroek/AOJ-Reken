@@ -11,30 +11,45 @@
 
 <body>
 
+  <script>
+    let running = false;
+    let editing = false;
+    let countdownSeconds = 15*60;   
+    let seconds;
+    let minutes;
+    let showAlert = false;
+  </script>
+  <script data-calc>
+    if (editing) {
+      countdownSeconds = parseInt(minutes)*60+parseInt(seconds)
+    }
+    seconds = ('0'+countdownSeconds%60).slice(-2);
+    minutes = ('0'+Math.floor(countdownSeconds/60)).slice(-2);
+  </script>
   <div class="wrapper">
-    <div class="ring">
+    <div class="ring" data-class="ending:countdownSeconds==0">
       <svg width="518" height="518" viewBox="0 0 518 518">
         <circle stroke-width="9px" x="0" y="y" cx="259" cy="259" r="254" />
       </svg>
     </div>
 
-    <div class="timer">
-      <div class="time">
+    <div data-interval="1000:running:if(--countdownSeconds<=0) { running=false;showAlert=true}" class="timer">
+      <div class="time" data-timer="0:showAlert:alert('Time is up!');showAlert=false">
         <div class="minutes">
-          <input type="text" value="15" disabled />
+          <input type="text" data-value="minutes" data-attr-disabled="!editing" />
         </div>
         <div class="colon">:</div>
         <div class="seconds">
-          <input type="text" value="00" disabled />
+          <input type="text" data-value="seconds" data-attr-disabled="!editing" />
         </div>
       </div>
-      <button class="start">start</button>
-      <button class="settings">
-        <img src="images/gear.svg" alt="Settings" />
+      <button class="start" data-action="running=!running;editing=false" data-text="${running?'pause':'start'}"></button>
+      <button class="settings" data-attr-disabled="editing">
+        <img src="images/gear.svg" data-action="editing=true;running=false" alt="Settings" />
       </button>
     </div>
   </div>
-
 </body>
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 
 </html>

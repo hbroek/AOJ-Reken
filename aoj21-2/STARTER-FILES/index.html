@@ -8,74 +8,31 @@
   <title>02 - E-Commerce Component || Advent of JavaScript</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
-
+<script>
+  let cart = []
+  inCart = (name) => cart.some((item)=>item.name===name)
+</script>
+<script data-calc>
+  let subtotal = cart.reduce((subtotal, item) => item.quantity*item.price/100+subtotal,0)
+  let tax = subtotal*.1
+  let total = tax+subtotal;
+</script>
 <body>
-
   <div class="wrapper menu">
     <div class="panel">
       <h1>To Go Menu</h1>
-      <ul class="menu">
+      <ul class="menu" data-for="mi:menuItems">
         <li>
           <div class="plate">
-            <img src="images/plate__french-fries.png" alt="French Fries" class="plate" />
+            <img data-attr-src="images/${mi.item.image}" data-attr-alt="${mi.item.alt}" class="plate"></img>
           </div>
           <div class="content">
-            <p class="menu-item">French Fries with Ketchup</p>
-            <p class="price">$2.23</p>
-            <button class="in-cart">
-              <img src="images/check.svg" alt="Check" />
-              In Cart
+            <p class="menu-item" data-text="${mi.item.name}"></p>
+            <p class="price" data-text="$${(mi.item.price/100).toFixed(2)}">$2.23</p>
+            <button data-class="in-cart:inCart(mi.item.name)">
+              <img data-if="inCart(mi.item.name)" src="images/check.svg" alt="Check"/>
+              <span data-text="${inCart(mi.item.name)?'In Cart':'Add to Cart'}" data-action="if(!inCart(mi.item.name)) cart.push({...mi.item, 'quantity': 1})">
             </button>
-          </div>
-        </li>
-        <li>
-          <div class="plate">
-            <img src="images/plate__salmon-vegetables.png" alt="Salmon and Vegetables" class="plate" />
-          </div>
-          <div class="content">
-            <p class="menu-item">Salmon and Vegetables</p>
-            <p class="price">$5.12</p>
-            <button class="add">Add to Cart</button>
-          </div>
-        </li>
-        <li>
-          <div class="plate">
-            <img src="images/plate__spaghetti-meat-sauce.png" alt="Spaghetti Meat Sauce" class="plate" />
-          </div>
-          <div class="content">
-            <p class="menu-item">Spaghetti with Meat Sauce</p>
-            <p class="price">$7.82</p>
-            <button class="add">Add to Cart</button>
-          </div>
-        </li>
-        <li>
-          <div class="plate">
-            <img src="images/plate__bacon-eggs.png" alt="Bacon, Eggs, and Toast" class="plate" />
-          </div>
-          <div class="content">
-            <p class="menu-item">Bacon, Eggs, and Toast</p>
-            <p class="price">$5.99</p>
-            <button class="add">Add to Cart</button>
-          </div>
-        </li>
-        <li>
-          <div class="plate">
-            <img src="images/plate__chicken-salad.png" alt="Chicken Salad with Parmesean" class="plate" />
-          </div>
-          <div class="content">
-            <p class="menu-item">Chicken Salad with Parmesan</p>
-            <p class="price">$6.98</p>
-            <button class="add">Add to Cart</button>
-          </div>
-        </li>
-        <li>
-          <div class="plate">
-            <img src="images/plate__fish-sticks-fries.png" alt="Fish Sticks and Fries" class="plate" />
-          </div>
-          <div class="content">
-            <p class="menu-item">Fish Sticks and Fries</p>
-            <p class="price">$6.34</p>
-            <button class="add">Add to Cart</button>
           </div>
         </li>
       </ul>
@@ -83,76 +40,49 @@
 
     <div class="panel cart">
       <h1>Your Cart</h1>
-      <!-- <p class="empty">Your cart is empty.</p> -->
+      <p data-if="cart.length==0" class="empty">Your cart is empty.</p>
 
-      <ul class="cart-summary">
-
-        <!-- item 1 -->
+      <ul data-if="cart.length>0" class="cart-summary" data-for="ci:cart">
         <li>
           <div class="plate">
-            <img src="images/plate__fish-sticks-fries.png" alt="Fish Sticks and Fries" class="plate" />
-            <div class="quantity">1</div>
+            <img data-attr-src="images/${ci.item.image}" data-attr-alt="Fish Sticks and Fries" class="plate" />
+            <div class="quantity" data-text="${ci.item.quantity}">1</div>
           </div>
           <div class="content">
-            <p class="menu-item">Fish Sticks and Fries</p>
-            <p class="price">$6.34</p>
+            <p class="menu-item" data-text="${ci.item.name}">Fish Sticks and Fries</p>
+            <p class="price" data-text="$${(ci.item.price/100).toFixed(2)}">$6.34</p>
           </div>
-          <div class="quantity__wrapper">
+         <div class="quantity__wrapper">
             <button class="decrease">
-              <img src="images/chevron.svg" />
+              <img src="images/chevron.svg" data-action="if (ci.item.quantity>1) ci.item.quantity--; else if (ci.item.quantity==1) cart.splice(ci.index,1)"/>
             </button>
-            <div class="quantity">1</div>
+            <div class="quantity" data-text="${ci.item.quantity}">1</div>
             <button class="increase">
-              <img src="images/chevron.svg" />
+              <img src="images/chevron.svg" data-action="ci.item.quantity++"/>
             </button>
           </div>
-          <div class="subtotal">
+          <div class="subtotal" data-text="$${(ci.item.price*ci.item.quantity/100).toFixed(2)}">
             $6.34
-          </div>
-        </li>
-
-        <!-- item 2 -->
-        <li>
-          <div class="plate">
-            <img src="images/plate__french-fries.png" alt="French Fries" class="plate" />
-            <div class="quantity">2</div>
-          </div>
-          <div class="content">
-            <p class="menu-item">French Fries with Ketchup</p>
-            <p class="price">$2.23</p>
-          </div>
-          <div class="quantity__wrapper">
-            <button class="decrease">
-              <img src="images/chevron.svg" />
-            </button>
-            <div class="quantity">2</div>
-            <button class="increase">
-              <img src="images/chevron.svg" />
-            </button>
-          </div>
-          <div class="subtotal">
-            $4.46
-          </div>
+          </div>     
         </li>
       </ul>
-
       <div class="totals">
         <div class="line-item">
           <div class="label">Subtotal:</div>
-          <div class="amount price subtotal">$10.80</div>
+          <div class="amount price subtotal" data-text="$${subtotal.toFixed(2)}">$10.80</div>
         </div>
         <div class="line-item">
           <div class="label">Tax:</div>
-          <div class="amount price tax">$1.05</div>
+          <div class="amount price tax" data-text="$${tax.toFixed(2)}">$1.05</div>
         </div>
         <div class="line-item total">
           <div class="label">Total:</div>
-          <div class="amount price total">$11.85</div>
+          <div class="amount price total" data-text="$${total.toFixed(2)}">$11.85</div>
         </div>
       </div>
     </div>
   </div>
-  <script src="app.js"></script>
 </body>
-
+<script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </html>

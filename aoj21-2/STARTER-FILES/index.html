@@ -29,9 +29,9 @@
           <div class="content">
             <p class="menu-item" data-text="${mi.item.name}"></p>
             <p class="price" data-text="$${(mi.item.price/100).toFixed(2)}">$2.23</p>
-            <button data-class="in-cart:inCart(mi.item.name)">
+            <button data-class="in-cart:inCart(mi.item.name)"  data-action="if(!inCart(mi.item.name)) cart.push({...mi.item, 'quantity': 1})">
               <img data-if="inCart(mi.item.name)" src="images/check.svg" alt="Check"/>
-              <span data-text="${inCart(mi.item.name)?'In Cart':'Add to Cart'}" data-action="if(!inCart(mi.item.name)) cart.push({...mi.item, 'quantity': 1})">
+              <span data-text="${inCart(mi.item.name)?'In Cart':'Add to Cart'}">
             </button>
           </div>
         </li>

@@ -10,18 +10,22 @@
 </head>
 
 <body>
+  <script>
+    let price = 6000
+  </script>
 
   <div class="wrapper">
     <div class="amount">
       <sup>$</sup>
-      <span class="dollars">50.00</span>
+      <span data-text="${Math.floor(price/100)}.${('00'+price%100).slice(-2)}" class="dollars">50.00</span>
     </div>
-    <input type="range" id="priceRange" min="0" max="10000" step="1" value="" />
+    <input type="range" id="priceRange" min="0" max="10000" step="1" data-value="price" />
     <br />
     <button>Buy Now</button>
     <script src="app.js"></script>
   </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 
 </html>

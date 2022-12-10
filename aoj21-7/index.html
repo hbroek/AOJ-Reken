@@ -10,28 +10,45 @@
 </head>
 
 <body>
+    <script>
 
+        let billAmount = 100
+        let numberOfPeople = 2
+        let tipString = '0.15'
+        let tip = parseFloat(tipString)
+        let totalPerPerson = 0
+
+        const calculate = () => {
+            billAmount = parseFloat(billAmount)
+            tip = parseFloat(tipString)
+            tipAmount = billAmount*tip
+            totalPerPerson = (billAmount+tipAmount)/numberOfPeople
+        }
+        const decimals = (value) => `${Math.floor(value)}.${('00'+(Math.floor(value*100)%100)).slice(-2)}`
+        calculate()
+
+    </script>
     <div class="wrapper">
 
         <div class="tip-amount">
             <div class="label">Tip Amount</div>
-            <div class="dollars"><sup>$</sup><span id="tip-amount">15.30</span></div>
+            <div class="dollars"><sup>$</sup><span id="tip-amount" data-text="${decimals(tipAmount)}">15.30</span></div>
         </div>
         <div class="total-per-person">
             <div class="label">Total Per Person</div>
-            <div class="dollars"><sup>$</sup><span id="total-per-person">39.11</span></div>
+            <div class="dollars"><sup>$</sup><span id="total-per-person" data-text="${decimals(totalPerPerson)}">39.11</span></div>
         </div>
 
         <div class="input-fields">
             <div class="bill-amount">
                 <div class="field">
-                    <input type="text" id="bill-amount" name="bill-amount" value="102.02" />
+                    <input type="text" id="bill-amount" name="bill-amount" data-value="billAmount" />
                 </div>
                 <div class="label">Bill Amount</div>
             </div>
             <div class="number-of-people">
                 <div class="field">
-                    <input type="text" id="number-of-people" name="number-of-people" value="3" />
+                    <input type="text" id="number-of-people" name="number-of-people" data-value="numberOfPeople" />
                 </div>
                 <div class="label">Number of People</div>
             </div>
@@ -39,36 +56,36 @@
 
         <div class="tip-percentages">
             <div>
-                <input type="radio" name="tip" value="5%" id="five-percent" />
+                <input type="radio" name="tip" value="0.05" id="five-percent" data-value="tipString"/>
                 <label for="five-percent">
                     5%
                 </label>
             </div>
             <div>
-                <input type="radio" name="tip" value="10%" id="ten-percent" />
+                <input type="radio" name="tip" value="0.1" id="ten-percent" data-value="tipString"/>
                 <label for="ten-percent">
                     10%
                 </label>
             </div>
             <div>
-                <input type="radio" name="tip" checked value="15%" id="fifteen-percent" />
+                <input type="radio" name="tip" value="0.15" id="fifteen-percent" data-value="tipString" />
                 <label for="fifteen-percent">
                     15%
                 </label>
             </div>
             <div>
-                <input type="radio" name="tip" value="20%" id="twenty-percent" />
+                <input type="radio" name="tip" value="0.20" id="twenty-percent" data-value="tipString"/>
                 <label for="twenty-percent">
                     20%
                 </label>
             </div>
         </div>
         <div class="button-wrapper">
-            <button id="calculate">Calculate</button>
+            <button id="calculate" data-action="calculate()">Calculate</button>
         </div>
     </div>
     <script src="app.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </body>
 
 </html>

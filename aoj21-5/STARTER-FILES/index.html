@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04 - Multiple Checkboxes || Advent of JavaScript</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body data-on-keydown="shift=e.shiftKey" data-onkeyup="shift=e.shiftKey">
+  <script>
+    const episodeList = [
+      {name:'episode-1', label: '1 || Trailer'},
+      {name:'episode-2', label: '2 || James Q Quick Origin Story'},
+      {name:'episode-3', label: '3 || Amy Dutton\'s Origin Story'},
+      {name:'episode-4', label: '4 || Starting a New Development Project'},
+      {name:'episode-5', label: '5 || How Do you Start a New Design Project?'},
+      {name:'episode-6', label: '6 || Freelancing (Part 1)'},
+      {name:'episode-7', label: '7 || Freelancing (Part 2'},
+      {name:'episode-8', label: '8 || The Tech Behind jamesqquick.com'},
+      {name:'episode-9', label: '9 || The Tech Behind SelfTeach.me'},
+      {name:'episode-10', label: '10 || Tech Behind SelfTeach.me'},
+    ]
+    
+    let selectedRow = []
+    let lastSelected
+    let shift = false
+
+    const selectBetween = (lastSelected, current) => {
+      const from = Math.min(lastSelected, current)
+      const to = Math.max(lastSelected, current)
+      for (let i = from+1; i < to; i++) {
+        const value = episodeList[i].name;
+        if (selectedRow.indexOf(value)<0)
+          selectedRow.push(value)
+      }
+    }
+  </script>
+<div class="wrapper">
+    <div class="cover">
+      <img src="./images/podcast-cover.png" alt="Compressed.fm" />
+    </div>
+    <div class="content">
+      <ul class="episodes" data-for="pc:episodeList" data-on-keydown="console.log(e)">
+        <li>
+          <label data-attr-for="ch_${pc.item.name}">
+            <input
+              data-on-change="if (shift) selectBetween(lastSelected, pc.index);lastSelected=pc.index"
+              type="checkbox"
+              name="checkboxes"
+              data-attr-id="ch_${pc.item.name}"
+              data-attr-value="${pc.item.name}"
+              data-value="selectedRow"/>
+            <span data-text="${pc.item.label}"></span>
+          </label>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
+</body>
+
+</html>

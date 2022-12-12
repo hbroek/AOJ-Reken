@@ -10,85 +10,29 @@
 </head>
 
 <body>
+  <script>
+    let current = 0;
+  </script>
 
   <div class="feature">
-    <img src="images/dave-hoefler-okUIdo6NxGo-unsplash.jpg" alt="Featured" />
-    <div class="caption">Photo by Dave Hoefler Unsplash</div>
+    <img data-attr-src="images/${content[current].image}" alt="Featured" />
+    <div class="caption" data-text="Photo by ${content[current].caption}"></div>
   </div>
 
   <div class="thumbnails">
-    <ul>
-      <li class="selected">
+    <ul data-for="photo:content">
+      <li data-class="selected:current==photo.index" data-action="current=photo.index">
         <a href="#">
-          <img src="./images/dave-hoefler-okUIdo6NxGo-unsplash.jpg" alt="">
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <img src="./images/eugene-golovesov-EXdXp7Z4X4w-unsplash.jpg" alt="">
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <img src="./images/finding-dan-dan-grinwis-O35rT6OytRo-unsplash.jpg" alt="">
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <img src="./images/jakob-owens-EwRM05V0VSI-unsplash.jpg" alt="">
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <img src="./images/jennifer-reynolds-_8HI5xf4TkE-unsplash.jpg" alt="">
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <img src="./images/kellen-riggin-SIBOiXKg0Ds-unsplash.jpg" alt="">
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <img src="./images/rafael-hoyos-weht-zhkAp8DGkxw-unsplash.jpg" alt="">
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <img src="./images/sherman-yang-VBBGigIuaDY-unsplash.jpg" alt="">
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <img src="./images/silas-baisch-Wn4ulyzVoD4-unsplash.jpg" alt="">
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <img src="./images/sonya-romanovska-wzdXhyi3AiM-unsplash.jpg" alt="">
-        </a>
-      </li>
-
-      <li>
-        <a href="#">
-          <img src="./images/vincentiu-solomon-ln5drpv_ImI-unsplash.jpg" alt="">
+          <img data-attr-src="images/${photo.item.image}" alt="">
         </a>
       </li>
     </ul>
   </div>
 
-  <a href="#" class="left"><img src="./images/chevron.svg" alt=""></a>
-  <a href="#" class="right"><img src="./images/chevron.svg" alt=""></a>
+  <a href="#" class="left"><img src="./images/chevron.svg" data-action="current--;if (current < 0) current = content.length-1" alt=""></a>
+  <a href="#" class="right"><img src="./images/chevron.svg" data-action="current++;if (current >= content.length) current = 0" alt=""></a>
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </body>
 
 </html>

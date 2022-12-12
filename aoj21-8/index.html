@@ -8,227 +8,93 @@
   <title>08 - Weather API || Advent of JavaScript</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
+<script>
+  let forecast = [
+    {
+      type: 'cloudy',
+      high: 72,
+      low: 28,
+      percipitation: 84
+    },
+    {
+      type: 'sunny',
+      high: 65,
+      low: 28,
+      percipitation: 84
+    },
+    {
+      type: 'stormy',
+      high: 67,
+      low: 28,
+      percipitation: 84
+    },
+    {
+      type: 'snowy',
+      high: 32,
+      low: 28,
+      percipitation: 84
+    },
+    {
+      type: 'cloudy',
+      high: 57,
+      low: 28,
+      percipitation: 84
+    },
+    {
+      type: 'rainy',
+      high: 63,
+      low: 28,
+      percipitation: 84
+    },
+    {
+      type: 'sunny',
+      high: 71,
+      low: 28,
+      percipitation: 84
+    }
+  ]
+  const addDays = (days) => {
+    var date = new Date();
+    date.setDate(date.getDate() + days);
+    return date;
+  }
+
+</script>
 
 <body>
-
-  <div class="wrapper">
+  <div class="wrapper" data-for="day:forecast">
     <!-- day - cloudy -->
     <div class="day">
-      <div class="day-of-week">Wed</div>
-      <div class="date">8</div>
+      <div class="day-of-week" data-text="${daysOfWeekMap[addDays(day.index).getDay()]}">Wed</div>
+      <div class="date" data-text="${addDays(day.index).getDate()}">8</div>
 
-      <div class="bar cloudy">
+      <div data-attr-class="bar ${day.item.type}">
         <div class="weather">
-          <svg role="img">
-            <use xlink:href="#cloudy" width="264" height="166" viewBox="0 0 264 166"></use>
+          <svg role="img" data-attr-width="${iconNameToSizeMap[day.item.type].width}"
+            data-attr-height="${iconNameToSizeMap[day.item.type].height}"
+            data-attr-viewBox="0 0 ${iconNameToSizeMap[day.item.type].width} ${iconNameToSizeMap[day.item.type].height}">
+            <use data-attr-href="#${day.item.type}"></use>
           </svg>
         </div>
         <div class="temperature">
-          72<span class="degrees">&deg;</span>
+          <span data-text="${day.item.high}"></span><span class="degrees">&deg;</span>
         </div>
         <div class="content">
           <div class="precipitation">
             <svg role="img" class="icon">
               <use xlink:href="#precipitation"></use>
             </svg>
-            84%
+            <span data-text="${day.item.percipitation}%"></span>
           </div>
           <div class="low">
             <svg role="img" class="icon">
               <use xlink:href="#low"></use>
             </svg>
-            28&deg;
+            <span data-text="${day.item.low}&deg;">
           </div>
         </div>
       </div>
     </div>
-
-    <!-- day - sunny -->
-    <div class="day">
-      <div class="day-of-week">Thur</div>
-      <div class="date">9</div>
-
-      <div class="bar sunny">
-        <div class="weather">
-          <svg role="img" width="208" height="213" viewBox="0 0 208 213">
-            <use xlink:href="#sunny"></use>
-          </svg>
-        </div>
-        <div class="temperature">
-          65<span class="degrees">&deg;</span>
-        </div>
-        <div class="content">
-          <div class="precipitation">
-            <svg role="img" class="icon">
-              <use xlink:href="#precipitation"></use>
-            </svg>
-            84%
-          </div>
-          <div class="low">
-            <svg role="img" class="icon">
-              <use xlink:href="#low"></use>
-            </svg>
-            28&deg;
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- day - stormy -->
-    <div class="day">
-      <div class="day-of-week">Fri</div>
-      <div class="date">10</div>
-
-      <div class="bar stormy">
-        <div class="weather">
-          <svg role="img" width="246" height="187" viewBox="0 0 246 187">
-            <use xlink:href="#stormy"></use>
-          </svg>
-        </div>
-        <div class="temperature">
-          67<span class="degrees">&deg;</span>
-        </div>
-        <div class="content">
-          <div class="precipitation">
-            <svg role="img" class="icon">
-              <use xlink:href="#precipitation"></use>
-            </svg>
-            84%
-          </div>
-          <div class="low">
-            <svg role="img" class="icon">
-              <use xlink:href="#low"></use>
-            </svg>
-            28&deg;
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- day - snowy -->
-    <div class="day">
-      <div class="day-of-week">Sat</div>
-      <div class="date">11</div>
-
-      <div class="bar snowy">
-        <div class="weather">
-          <svg role="img" width="230" height="196" viewBox="0 0 230 196">
-            <use xlink:href="#snowy"></use>
-          </svg>
-        </div>
-        <div class="temperature">
-          32<span class="degrees">&deg;</span>
-        </div>
-        <div class="content">
-          <div class="precipitation">
-            <svg role="img" class="icon">
-              <use xlink:href="#precipitation"></use>
-            </svg>
-            84%
-          </div>
-          <div class="low">
-            <svg role="img" class="icon">
-              <use xlink:href="#low"></use>
-            </svg>
-            28&deg;
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- day - partly cloudy -->
-    <div class="day">
-      <div class="day-of-week">Sun</div>
-      <div class="date">12</div>
-
-      <div class="bar partly-cloudy">
-        <div class="weather">
-          <svg role="img" width="230" height="209" viewBox="0 0 230 209">
-            <use xlink:href="#partly-cloudy"></use>
-          </svg>
-        </div>
-        <div class="temperature">
-          57<span class="degrees">&deg;</span>
-        </div>
-        <div class="content">
-          <div class="precipitation">
-            <svg role="img" class="icon">
-              <use xlink:href="#precipitation"></use>
-            </svg>
-            84%
-          </div>
-          <div class="low">
-            <svg role="img" class="icon">
-              <use xlink:href="#low"></use>
-            </svg>
-            28&deg;
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- day - rainy -->
-    <div class="day">
-      <div class="day-of-week">Mon</div>
-      <div class="date">13</div>
-
-      <div class="bar rainy">
-        <div class="weather">
-          <svg role="img" width="160" height="222" viewBox="0 0 160 222">
-            <use xlink:href="#rainy"></use>
-          </svg>
-        </div>
-        <div class="temperature">
-          63<span class="degrees">&deg;</span>
-        </div>
-        <div class="content">
-          <div class="precipitation">
-            <svg role="img" class="icon">
-              <use xlink:href="#precipitation"></use>
-            </svg>
-            84%
-          </div>
-          <div class="low">
-            <svg role="img" class="icon">
-              <use xlink:href="#low"></use>
-            </svg>
-            28&deg;
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- day - sunny -->
-    <div class="day">
-      <div class="day-of-week">Tue</div>
-      <div class="date">14</div>
-
-      <div class="bar sunny">
-        <div class="weather">
-          <svg role="img" width="208" height="213" viewBox="0 0 208 213">
-            <use xlink:href="#sunny"></use>
-          </svg>
-        </div>
-        <div class="temperature">
-          71<span class="degrees">&deg;</span>
-        </div>
-        <div class="content">
-          <div class="precipitation">
-            <svg role="img" class="icon">
-              <use xlink:href="#precipitation"></use>
-            </svg>
-            84%
-          </div>
-          <div class="low">
-            <svg role="img" class="icon">
-              <use xlink:href="#low"></use>
-            </svg>
-            28&deg;
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -4381,6 +4247,8 @@
     </symbol>
   </svg>
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
+
 </body>
 
 </html>

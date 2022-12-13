@@ -10,21 +10,51 @@
 </head>
 
 <body>
+  <script>
+    const codeLength = 4;
+    let digits;
+    let currentDigit;
+
+    const reset = () => {
+      digits = Array(codeLength).fill('')
+      currentDigit = 0;
+    }
+    reset();
+
+    paste = () => {
+      navigator.clipboard.readText()
+      .then((clipText)=> {        
+        currentDigit = 0;
+        for (char of clipText) {
+          digits[currentDigit] = char;
+          if (currentDigit<codeLength-1) 
+            currentDigit++
+          else
+            break;
+        }
+      })
+      .then(()=>rekenForceCalculate())
+      
+    }
+  </script>
 
   <div class="wrapper">
     <h1>Authorization Code</h1>
     <p>Please enter the code that we sent to (***) *** - 2819.</p>
     <form action="">
-      <div class="fields">
-        <input type="text" maxlength="1" value="1" name="verification_1" />
-        <input type="text" maxlength="1" value="" name="verification_2" />
-        <input type="text" maxlength="1" value="" name="verification_3" />
-        <input type="text" maxlength="1" value="" name="verification_4" />
+      <div class="fields" data-for="digit:codeLength">
+        <input data-calc="if (digit.index == currentDigit) elem.focus()"
+          type="text" maxlength="1"
+          data-value="digits[digit.index]"
+          data-on-input="if (e.inputType === 'insertFromPaste') {paste(); return} digits[digit.index]=e.data;if (currentDigit<codeLength-1) currentDigit++"
+          data-attr-name="verification_${digit+1}"
+          data-action="currentDigit=digit.index" />
+          
       </div>
-      <button>Verify</button>
+      <button data-action="alert('Verified');reset()">Verify</button>
     </form>
   </div>
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </body>
-
 </html>

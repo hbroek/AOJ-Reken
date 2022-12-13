@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <style>
+            body {
+                font-family: "Avenir-Next";
+                font-weight: 400;
+                letter-spacing: 0em;
+                line-height: 1.75;
+            }
+        </style>
+
+    </head>
+    <script>
+        let challenges = [
+            {
+                name: "Pomodoro timer",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-1/STARTER-FILES",
+                demo: "https://hbroek.github.io/AOJ-Reken/aoj21-1/STARTER-FILES/index.html"
+            },
+            {
+                name: "Shopping cart",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-2/STARTER-FILES",
+                demo: "https://hbroek.github.io/AOJ-Reken/aoj21-2/STARTER-FILES/index.html"
+            },
+            {
+                name: "Funky piano",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-3",
+                demo: "https://hbroek.github.io/AOJ-Reken/aoj21-3/index.html"
+            },
+            {
+                name: "Keyboard",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-4/STARTER-FILES",
+                demo: "https://hbroek.github.io/AOJ-Reken/aoj21-4/STARTER-FILES/index.html"
+            },
+            {
+                name: "Podcast list",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-5/STARTER-FILES",
+                demo: "https://hbroek.github.io/AOJ-Reken/aoj21-5/STARTER-FILES/index.html"
+            },
+            {
+                name: "Slider",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-6/STARTER-FILES",
+                demo: "https://hbroek.github.io/AOJ-Reken/aoj21-6/STARTER-FILES/index.html"
+            },
+            {
+                name: "Tip calculator",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-7",
+                demo: "https://hbroek.github.io/AOJ-Reken/aoj21-7/index.html"
+            },
+            {
+                name: "Weather forecast",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-8",
+                demo: "https://hbroek.github.io/AOJ-Reken/aoj21-8/index.html"
+            },
+            {
+                name: "Photo gallery",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-9",
+                demo: "https://hbroek.github.io/AOJ-Reken/aoj21-9/index.html"
+            },
+            {
+                name: "Authorization code",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-10",
+                demo: "https://hbroek.github.io/AOJ-Reken/aoj21-10/index.html"
+            },
+            {
+                name: "Drawer",
+                source: "https://github.com/hbroek/AOJ-Reken/tree/main/aoj21-11/STARTER-FILES",
+                demo: "https://hbroek.github.io/AOJ-Reken/aoj21-11/STARTER-FILES/index.html"
+            },
+        ]
+    </script>
+    <body>
+        <header>
+            <h1>Solutions for Advent of Javascript</h1>
+            <h3>Implemented with web dev framework <a href="https://reken.dev">Reken</h3>
+        </header>
+        <main>
+            <section>
+                <h2>Advent of Javascript challenge</h2>
+                Complete <a href="https://store.selfteach.me/advent-of-css">24 Javascript coding challenges</a> from December 1st thru 24th. Organized by <a href="https://selfteach.me/">selfteach.me</a> The challenges are focussed at making already provided static web sites/apps interactive.
+                <h2>Why Reken?</h2>
+                Reken is an easy way to add functionality to an existing website. I build Reken with that in mind. Take existing HTML sprinkle some Reken data- attributes and see it come alive like putting lights in a Christmas tree.
+                <h2>Who are you?</h2>
+                Glad you asked I'm Henry van den Broek, developer of <a href="https://reken.dev">Reken</a>. And I love this challenge to put Reken through its paces. And sofar with great success. You'll see that some solutions are literally just a sprinkle of Reken goodness.
+                <h2>Where are solutions?</h2>
+                You'll find links to the source code on Github below. I also created a Github pages website (this page) where you can see the life samples
+            </section>
+            <section><h2>Solutions</h2>
+                <ol data-for="c:challenges">
+                    <li>
+                        <a data-attr-href="${c.item.demo}" data-text="${c.item.name}">Pomodoro timer</a> - <a data-attr-href="${c.item.source}">(source)</a>
+                    </li>
+                </ol>
+
+            </section>
+        </main>
+        <footer>(c)2022, Henry van den Broek</footer>
+    </body>
+    <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
+
+</html>

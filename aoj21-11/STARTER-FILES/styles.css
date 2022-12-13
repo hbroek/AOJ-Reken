@@ -71,6 +71,9 @@ a {
   height: calc(100% + 15px);
   z-index: -1;
 }
+.expand .question:after {
+  background: #F0F0F0 url('./images/close.svg') calc(100% - 12px) 20px no-repeat;
+}
 
 .expand .question:after,
 a:hover .question:after {
@@ -83,14 +86,16 @@ a:hover .question:after {
 }
 
 .answer {
-  display: none;
-}
-
-.expand .answer {
-  display: block;
+  max-height:0;
+  transition: max-height 0.3s;
   background-color: #FFDD00;
   width: calc(100% - 60px);
   margin-left: 55px;
-  padding: 30px 75px;
+  padding: 0px 75px;
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+.expand .answer {
+  max-height:100vh;
 }

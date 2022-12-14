@@ -103,3 +103,12 @@ body.winner img {
   background: black;
   color: white;
 }
+
+h1.draw {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 2rem;
+}

@@ -9,17 +9,58 @@
     <link rel="stylesheet" href="./styles.css" />
 </head>
 
+
 <body>
+    <script>
+        let calendarDate = new Date();
+        let todayDate = calendarDate.getDate();
+
+        const isSameMonth = (date1, date2) => {
+            return date1.getFullYear() === date2.getFullYear()
+                && date1.getMonth() == date2.getMonth();
+        }
+    </script>
+    <script data-calc>
+        let currentDate = new Date(calendarDate.getTime())
+        let title = `${currentDate.getFullYear()} - ${currentDate.toLocaleString('default', { month: 'long' })}`;
+
+        today = isSameMonth(calendarDate, new Date())?todayDate:-1;
+ 
+        let currentDay = currentDate.getDay();
+        let currentMonth = currentDate.getMonth();
+        console.log(currentDate, currentDay, currentMonth)
+
+        calendar = [] // Will contain the day numbers lined up with the grid cells
+
+        // prefill calendar with empty days
+        for (let i=0;i<currentDay;i++) {
+            calendar.push('')
+        }
+
+        // fill dates with date numbers
+        let i = 1;
+        currentDate.setDate(i)
+        while(currentMonth==currentDate.getMonth()) {
+            calendar.push(''+(i++))
+            currentDate.setDate(i)
+        }
+
+        // post fill calendar with empty days
+        while (calendar.length<42) {
+            calendar.push('')
+        }
+    </script>
+
     <div class="wrapper">
 
         <div class="previous">
-            <img src="images/previous.svg" alt="Previous" />
+            <img src="images/previous.svg" alt="Previous" data-action="calendarDate.setMonth(calendarDate.getMonth()-1)" />
         </div>
 
-        <div class="month">December</div>
+        <div class="month" data-text="${title}">December</div>
 
         <div class="next">
-            <img src="images/next.svg" alt="Next" />
+            <img src="images/next.svg" alt="Next" data-action="calendarDate.setMonth(calendarDate.getMonth()+1)"/>
         </div>
 
         <div class="day-of-week">S</div>
@@ -30,44 +71,56 @@
         <div class="day-of-week">F</div>
         <div class="day-of-week">S</div>
 
-        <div></div>
-        <div></div>
-        <div> </div>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-        <div>9</div>
-        <div>10</div>
-        <div>11</div>
-        <div>12</div>
-        <div>13</div>
-        <div class="today">14</div>
-        <div>15</div>
-        <div>16</div>
-        <div>17</div>
-        <div>18</div>
-        <div>19</div>
-        <div>20</div>
-        <div>21</div>
-        <div>22</div>
-        <div>23</div>
-        <div>24</div>
-        <div>25</div>
-        <div>26</div>
-        <div>27</div>
-        <div>28</div>
-        <div>29</div>
-        <div>30</div>
-        <div>31</div>
-        <div></div>
+        <day index="0"></day>
+        <day index="1"></day>
+        <day index="2"></day>
+        <day index="3"></day>
+        <day index="4"></day>
+        <day index="5"></day>
+        <day index="6"></day>
+        <day index="7"></day>
+        <day index="8"></day>
+        <day index="9"></day>
+        <day index="10"></day>
+        <day index="11"></day>
+        <day index="12"></day>
+        <day index="13"></day>
+        <day index="14"></day>
+        <day index="15"></day>
+        <day index="16"></day>
+        <day index="17"></day>
+        <day index="18"></day>
+        <day index="19"></day>
+        <day index="20"></day>
+        <day index="21"></day>
+        <day index="22"></day>
+        <day index="23"></day>
+        <day index="24"></day>
+        <day index="25"></day>
+        <day index="26"></day>
+        <day index="27"></day>
+        <day index="28"></day>
+        <day index="29"></day>
+        <day index="30"></day>
+        <day index="31"></day>
+        <day index="32"></day>
+        <day index="33"></day>
+        <day index="34"></day>
+        <day index="35"></day>
+        <day index="36"></day>
+        <day index="37"></day>
+        <day index="38"></day>
+        <day index="39"></day>
+        <day index="40"></day>
+        <day index="41"></day>
 
     </div>
     <script src="app.js"></script>
 </body>
-
+<template data-component="day" data-arg-index>
+    <div
+        data-class="today:today==calendar[index]" data-text="${calendar[index]}">
+    </div>
+</template>
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </html>

@@ -33,7 +33,7 @@ svg circle.dot {
   position: relative;
 }
 
-a:hover #my-circle {
+a:hover .circle {
   animation-name: beacon;
   animation-iteration-count: infinite;
   animation-duration: 1s;
@@ -66,6 +66,8 @@ a:hover #my-circle {
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: scale(0);
+  transition: transform 0.3s;
 }
 
 .modal {
@@ -77,6 +79,9 @@ a:hover #my-circle {
   display: flex;
   gap: 100px;
   position: relative;
+}
+.show-overlay {
+  transform: scale(1);
 }
 
 .product-image,

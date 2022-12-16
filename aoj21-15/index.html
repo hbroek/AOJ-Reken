@@ -10,7 +10,13 @@
 </head>
 
 <body>
-
+  <script src="sampleData.js"></script>
+  <script>
+    let currentVideo = 0
+  </script>
+  <script data-calc>
+    let current = sampleAPIResponse.items[currentVideo]
+  </script>
   <div class="wrapper">
     <header>
       <img src="images/logo.png" alt="YouTube" />
@@ -18,16 +24,14 @@
 
     <div class="feature">
       <div class="embed">
-        <iframe width="100%" height="500" src="https://www.youtube.com/embed/YipaPr4Aex8" title="YouTube video player"
+        <iframe width="100%" height="500" data-attr-src="https://www.youtube.com/embed/${current.id.videoId}" title="${current.snippet.title}"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>
       </div>
-      <h1>
-        Build an App with SvelteKit and Tailwind CSS
-      </h1>
+      <h1 data-text="${current.snippet.title}"></h1>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      <p data-text="${current.snippet.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
         magna
         aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
         consequat. Duis
@@ -37,81 +41,17 @@
     </div>
 
     <aside>
-      <ul class="gallery">
+      <ul class="gallery" data-for="i:sampleAPIResponse.items">
         <li>
-          <a class="video">
-            <img src="images/placeholder.png" alt="">
-            <h3>Build a SvelteKit App</h3>
+          <a class="video" data-action="currentVideo=i.index">
+            <img data-attr-src="${i.item.snippet.thumbnails.default.url}" alt="">
+            <h3 data-text="${i.item.snippet.title}">Build a SvelteKit App</h3>
           </a>
         </li>
-
-        <li>
-          <a class="video">
-            <img src="images/placeholder.png" alt="">
-            <h3>Build a SvelteKit App</h3>
-          </a>
-        </li>
-
-        <li>
-          <a class="video">
-            <img src="images/placeholder.png" alt="">
-            <h3>Build a SvelteKit App</h3>
-          </a>
-        </li>
-
-        <li>
-          <a class="video">
-            <img src="images/placeholder.png" alt="">
-            <h3>Build a SvelteKit App</h3>
-          </a>
-        </li>
-
-        <li>
-          <a class="video">
-            <img src="images/placeholder.png" alt="">
-            <h3>Build a SvelteKit App</h3>
-          </a>
-        </li>
-
-        <li>
-          <a class="video">
-            <img src="images/placeholder.png" alt="">
-            <h3>Build a SvelteKit App</h3>
-          </a>
-        </li>
-
-        <li>
-          <a class="video">
-            <img src="images/placeholder.png" alt="">
-            <h3>Build a SvelteKit App</h3>
-          </a>
-        </li>
-
-        <li>
-          <a class="video">
-            <img src="images/placeholder.png" alt="">
-            <h3>Build a SvelteKit App</h3>
-          </a>
-        </li>
-
-        <li>
-          <a class="video">
-            <img src="images/placeholder.png" alt="">
-            <h3>Build a SvelteKit App</h3>
-          </a>
-        </li>
-
-        <li>
-          <a class="video">
-            <img src="images/placeholder.png" alt="">
-            <h3>Build a SvelteKit App</h3>
-          </a>
-        </li>
-
       </ul>
     </aside>
   </div>
   <script src="app.js"></script>
 </body>
-
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </html>

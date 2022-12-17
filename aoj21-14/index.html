@@ -22,13 +22,13 @@
     </script>
     <script data-calc>
         let currentDate = new Date(calendarDate.getTime())
+        currentDate.setDate(1);
         let title = `${currentDate.getFullYear()} - ${currentDate.toLocaleString('default', { month: 'long' })}`;
 
         today = isSameMonth(calendarDate, new Date())?todayDate:-1;
  
         let currentDay = currentDate.getDay();
         let currentMonth = currentDate.getMonth();
-        console.log(currentDate, currentDay, currentMonth)
 
         calendar = [] // Will contain the day numbers lined up with the grid cells
 

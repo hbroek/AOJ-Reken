@@ -10,14 +10,56 @@
 </head>
 
 <body>
+  <script>
+    let noOfChars = 6;
+    let password = ''
+
+    let includeSymbols = true;
+    let includeNumbers = true;
+    let includeLowercase = true;
+    let includeUppercase = true;
+    let includeSimilars = true;
+
+    const symbols = "!@#$%^&*()_-+={[}]|\\:;'\"<,>.?/"
+    const numbers = "01234567890"
+    const lowercase = "abcdefghijklmnopqrstuvwxyz"
+    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    const similars = "il1Lo0O"
+    let lastInputState = ''
+
+    let copied = false;
+    function copy() {
+      if (navigator.clipboard) {
+          navigator.clipboard.writeText(password)
+      }
+    }
+  </script>
+  <script data-calc>
+    let inputState = noOfChars+includeSymbols+includeNumbers+includeLowercase+includeUppercase+includeSimilars
+    if (inputState!=lastInputState) {
+      lastInputState = inputState
+
+      let chars = ''
+      chars += includeSymbols?symbols:''
+      chars += includeNumbers?numbers:''
+      chars += includeLowercase?lowercase:''
+      chars += includeUppercase?uppercase:''
+      chars += includeSimilars?similars:''
+
+      password = ''
+      for (let i = 0; i < noOfChars; i++) {
+        password += chars[Math.floor(Math.random()*chars.length)]
+      }
+    }
+  </script>
 
   <div class="wrapper">
 
     <div class="field">
-      <input type="text" name="password" id="password" value="" min="6" max="32" steps="1" />
+      <input type="text" name="password" id="password" min="6" max="32" steps="1" data-value="password"/>
 
       <!-- 👇🏻 Add a class of "copied" when the user clicks this button 👇🏻 -->
-      <button class="copy">
+      <button data-timer="5000:copied:copied=false" class="copy" data-class="copied" data-action="copy(); copied=true;">
         <svg width="55" height="55" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M37.3147 2.83081H20.6332C18.1514 2.83081 16.1332 4.85131 16.1332 7.33081V38.8308C16.1332 41.3126 18.1514 43.3308 20.6332 43.3308H43.1332C45.6149 43.3308 47.6332 41.3126 47.6332 38.8308V13.1493L37.3147 2.83081ZM43.1354 38.8308H20.6332V7.33081H34.1332V16.3308H43.1332L43.1354 38.8308Z" />
@@ -29,37 +71,38 @@
     </div>
 
     <div class="field">
-      <input type="range" name="length" id="length" value="12" min="6" max="32" />
-      <span id="lengthText">12</span> characters
+      <input data-value="noOfChars" type="range" name="length" id="length" value="12" min="6" max="32" />
+      <span data-text="${noOfChars}" id="lengthText">12</span>&nbsp;characters
     </div>
 
     <div class="field">
-      <input type="checkbox" name="symbols" id="symbols" value="true" checked="true" />
+      <input data-value="includeSymbols" type="checkbox" id="symbols" />
       <label for="symbols"><strong>Include Symbols</strong> (@#$%)</label>
     </div>
 
     <div class="field">
-      <input type="checkbox" name="numbers" id="numbers" checked="true"/>
+      <input data-value="includeNumbers" type="checkbox" id="numbers"/>
       <label for="numbers"><strong>Include Numbers</strong> (1234)</label>
     </div>
 
     <div class="field">
-      <input type="checkbox" name="lowercase" id="lowercase" checked="true"/>
+      <input data-value="includeLowercase" type="checkbox" id="lowercase"/>
       <label for="lowercase"><strong>Include Lowercase Characters</strong> (abcd)</label>
     </div>
 
     <div class="field">
-      <input type="checkbox" name="uppercase" id="uppercase" checked="true"/>
+      <input data-value="includeUppercase" type="checkbox" id="uppercase"/>
       <label for="uppercase"><strong>Include Uppercase Characters</strong> (ABCD)</label>
     </div>
 
     <div class="field">
-      <input type="checkbox" name="similar" id="similar" checked="true"/>
+      <input data-value="includeSimilars" type="checkbox" id="similar"/>
       <label for="similar"><strong>Include Similar Characters</strong> (i, l, 1, L, o, 0, O)</label>
     </div>
 
   </div>
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </body>
 
 </html>

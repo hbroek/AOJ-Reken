@@ -10,45 +10,70 @@
 </head>
 
 <body>
+  <script>
+    let name = ''
+    let email = ''
+    let password = ''
+    let confirmPassword = ''
 
+    let showPassword = false;
+    let showConfirmPassword = false;
+  </script>
   <form action="">
     <h1>Signup</h1>
     <div class="field">
-      <input type="text" name="name" id="name" placeholder=" " />
+      <input type="text" name="name" id="name" placeholder=" " data-value="name"/>
       <label for="name">Name</label>
-      <div class="error">
+      <div class="error" data-if="name==''">
         <img src="./images/error.svg" alt="Error" />
         A name is required
       </div>
-      <div class="success"></div>
-    </div>
-    <div class="field">
-      <input type="email" name="email" id="email" placeholder=" " />
-      <label for="email">Email</label>
-      <div class="error"></div>
-      <div class="success">
+      <div class="success" data-if="name!=''">
         <img src="./images/success.svg" alt="Success" />
       </div>
     </div>
     <div class="field">
-      <input type="password" name="password" id="password" placeholder=" " />
-      <label for="password">Password</label>
-      <button class="show-hide"></button>
-      <div class="error"></div>
-      <div class="success"></div>
+      <input type="email" name="email" id="email" placeholder=" " data-value="email"/>
+      <label for="email">Email</label>
+      <div class="error"  data-if="email===''||email.indexOf('@')<0">
+        <img src="./images/error.svg" alt="Error" />
+        A valid email is required
+      </div>
+      <div class="success" data-if="email!==''&&email.indexOf('@')>0">
+        <img src="./images/success.svg" alt="Success" />
+      </div>
     </div>
-    <div class="field show">
-      <input type="text" name="confirm-password" id="confirm-password" placeholder=" " />
+    <div class="field" data-class="show:showPassword">
+      <input data-attr-type="${showPassword?'text':'password'}" name="password" id="password" placeholder=" "  data-value="password"/>
+      <label for="password">Password</label>
+      <button type="button" class="show-hide" data-action="showPassword=!showPassword"></button>
+      <div class="error"  data-if="password==''">
+        <img src="./images/error.svg" alt="Error" />
+        A password is required
+      </div>
+      <div class="success" data-if="password!=''">
+        <img src="./images/success.svg" alt="Success"/>
+      </div>
+    </div>
+    <div class="field" data-class="show:showConfirmPassword">
+      <input data-attr-type="${showConfirmPassword?'text':'password'}" name="confirm-password" id="confirm-password" placeholder=" " data-value="confirmPassword" />
       <label for="confirm-password">Confirm Password</label>
-      <button class="show-hide"></button>
-      <div class="error"></div>
-      <div class="success"></div>
+      <button type="button" class="show-hide" data-action="showConfirmPassword=!showConfirmPassword"></button>
+      <div class="error" data-if="confirmPassword==''||confirmPassword!==password">
+        <img src="./images/error.svg" alt="Error" />
+          <span data-if="confirmPassword==''">A confirmation password is required</span>
+          <span data-if="confirmPassword!==password">The passwords need to match</span>
+      </div>
+      <div class="success" data-if="confirmPassword!=''&&confirmPassword===password">
+        <img src="./images/success.svg" alt="Success"/>
+      </div>
     </div>
     <div class="field">
-      <input type="submit" name="submit" value="Submit" />
+      <input data-attr-disabled="name==''||email==''||password==''||email.indexOf('@')<0||password!==confirmPassword" type="submit" name="submit" value="Submit" />
     </div>
   </form>
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>  
 </body>
 
 </html>

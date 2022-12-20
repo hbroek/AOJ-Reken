@@ -105,6 +105,9 @@ input[type="submit"] {
   font-size: 1.5rem;
   margin-top: 10px;
 }
+input[type="submit"][disabled] {
+  background:darkgray;
+}
 
 .error,
 .success {

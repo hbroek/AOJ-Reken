@@ -10,57 +10,18 @@
 </head>
 
 <body>
+  <script>
+    let selected = 0;
+  </script>
 
   <div class="wrapper">
     <aside>
       <a href="http://compressed.fm" target="_blank"><img src="./images/logo.svg" alt="Compressed.fm" /></a>
-      <ul id="tabs">
-        <li class="selected">
+      <ul id="tabs" data-for="episode:episodes">
+        <li data-class="selected:episode.index==selected" data-action="selected=episode.index"
           <a href="#">
-            <div class="episode">Episode 39</div>
-            <div class="title">Tech to Look Forward to in 2022</div>
-          </a>
-        </li>
-
-        <li>
-          <a href="#">
-            <div class="episode">Episode 39</div>
-            <div class="title">Tech to Look Forward to in 2022</div>
-          </a>
-        </li>
-
-        <li>
-          <a href="#">
-            <div class="episode">Episode 39</div>
-            <div class="title">Tech to Look Forward to in 2022</div>
-          </a>
-        </li>
-
-        <li>
-          <a href="#">
-            <div class="episode">Episode 39</div>
-            <div class="title">Tech to Look Forward to in 2022</div>
-          </a>
-        </li>
-
-        <li>
-          <a href="#">
-            <div class="episode">Episode 39</div>
-            <div class="title">Tech to Look Forward to in 2022</div>
-          </a>
-        </li>
-
-        <li>
-          <a href="#">
-            <div class="episode">Episode 39</div>
-            <div class="title">Tech to Look Forward to in 2022</div>
-          </a>
-        </li>
-
-        <li>
-          <a href="#">
-            <div class="episode">Episode 39</div>
-            <div class="title">Tech to Look Forward to in 2022</div>
+            <div class="episode" data-text="Episode ${episode.index+1}">Episode 39</div>
+            <div class="title" data-text="${episode.item.title}">Tech to Look Forward to in 2022</div>
           </a>
         </li>
       </ul>
@@ -68,18 +29,18 @@
 
     <main>
       <div class="cover">
-        <img src="./images/cover__episode-39.png" alt="Episode 39" />
+        <img data-attr-src="./images/${episodes[selected].cover}" data-attr-alt="Episode ${selected+1}" />
       </div>
       <div class="content">
-        <h1>Tech to Look Forward to in 2022</h1>
-        <p>In this episode, Amy and James discuss the future of web development: Astro, Veet, Supabase, SvelteKit,
+        <h1 data-text="${episodes[selected].title}">Tech to Look Forward to in 2022</h1>
           Redwood.js,
           Blitz.js, GitHub Co-Pilot, Web Assembly, Blockchain, w3, no-code, and low-code.</p>
-        <a href="#" class="more">More</a>
+        <a data-attr-href="${episodes[selected].link}" class="more">More</a>
       </div>
     </main>
   </div>
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>  
 </body>
 
 </html>

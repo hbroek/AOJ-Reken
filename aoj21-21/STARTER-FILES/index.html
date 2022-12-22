@@ -10,24 +10,40 @@
 </head>
 
 <body>
+  <script>
+    let budget = 0;
+    let expenseList = [];
+    let expenseName = '';
+    let expense = 0;
+    let income = 0;
+    let expenses = 0;
+    let balance = 0;
+
+    const numberFormat = ((num) => `$${(num/1).toFixed(2)}`);
+  </script>
+  <script data-calc>
+    income   = budget;
+    expenses = expenseList.reduce((sum, item) => sum+item.expense, 0);
+    balance  = income - expenses;
+  </script>
 
   <div class="wrapper">
     <div class="add-panel">
       <h1>Simplified Budget</h1>
       <div class="field">
-        <input type="text" name="income" id="income" />
+        <input data-value="budget" type="text" name="income" id="income"/>
         <label for="income">Budget Amount</label>
       </div>
       <div class="add-expense">
         <div class="field">
-          <input type="text" name="expense-name" id="expense-name" />
+          <input data-value="expenseName" type="text" name="expense-name" id="expense-name"/>
           <label for="expense-name">Expense</label>
         </div>
         <div class="field">
-          <input type="text" name="expense-amount" id="expense-amount" />
+          <input data-value="expense" type="text" name="expense-amount" id="expense-amount"/>
           <label for="expense-amount">Amount</label>
         </div>
-        <button name="add-expense-button" id="add-expense-button" class="add-expense-button">
+        <button data-action="expenseList.push({'name':expenseName, 'expense':parseFloat(expense)})" name="add-expense-button" id="add-expense-button" class="add-expense-button">
           <img src="./images/plus.svg" alt="Plus" />
         </button>
       </div>
@@ -35,53 +51,40 @@
 
     <div class="expenses-panel">
       <h2>Expenses</h2>
-      <div class="expense-table">
-
-        <div>Starbucks</div>
-        <div>$5.54</div>
-        <div class="delete">
-          <button name="delete-expense" class="delete-expense">
-            <img src="./images/trash.svg" alt="Tash" />
-          </button>
+      <div data-for="expense:expenseList" class="expense-table">
+        <div>
+          <div data-text="${expense.item.name}">Starbucks</div>
+          <div data-text="${numberFormat(expense.item.expense)}">$5.54</div>
+          <div class="delete">
+            <button data-action="expenseList.splice(expense.index, 1);" name="delete-expense" class="delete-expense">
+              <img src="./images/trash.svg" alt="Tash" />
+            </button>
+          </div>
         </div>
-
-        <div>Starbucks</div>
-        <div>$5.54</div>
-        <div class="delete">
-          <button name="delete-expense" class="delete-expense">
-            <img src="./images/trash.svg" alt="Tash" />
-          </button>
-        </div>
-
-        <div>Starbucks</div>
-        <div>$5.54</div>
-        <div class="delete">
-          <button name="delete-expense" class="delete-expense">
-            <img src="./images/trash.svg" alt="Tash" />
-          </button>
-        </div>
-
       </div>
     </div>
 
     <div class="summary-panel">
       <div class="summary-item">
         <div class="summary-label">Income</div>
-        <div class="summary-amount">$42,000.00</div>
+        <div data-text="${numberFormat(income)}" class="summary-amount">$42,000.00</div>
       </div>
 
       <div class="summary-item">
         <div class="summary-label">Expenses</div>
-        <div class="summary-amount">$42,000.00</div>
+        <div data-text="${numberFormat(expenses)}" class="summary-amount">$42,000.00</div>
       </div>
 
       <div class="summary-item">
         <div class="summary-label">Balance</div>
-        <div class="summary-amount">$42,000.00</div>
+        <div data-text="${numberFormat(balance)}"
+          data-class="positive:balance>0;negative:balance<0"
+          class="summary-amount">$42,000.00</div>
       </div>
     </div>
   </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 
 </html>

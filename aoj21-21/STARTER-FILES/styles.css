@@ -90,12 +90,25 @@ input[type=text]:focus + label {
   padding: 220px 125px 180px;
 }
 
-.expense-table {
+/* .expense-table {
   display: grid;
   grid-template-columns: 1fr 150px auto;
+} */
+
+.expense-table {
+  display: flex;
+  flex-direction: column;
 }
 
 .expense-table div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: .25em;
+}
+
+.expense-table div div{
   border-bottom: 2px solid #313131;
   padding: 16px 0;
 }

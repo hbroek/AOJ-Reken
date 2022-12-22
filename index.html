@@ -43,7 +43,7 @@
 
     </head>
     <script>        
-        let darkTheme = !window.matchMedia("(prefers-color-scheme: dark)").matches
+        let darkTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
         let challenges = [
             {
                 name: "Pomodoro timer",

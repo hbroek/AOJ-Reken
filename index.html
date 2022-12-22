@@ -12,7 +12,21 @@
                 font-weight: 400;
                 letter-spacing: 0em;
                 line-height: 1.75;
+                color: #222;
+                background-color: #fff;
+                transition: color 0.5s, background-color 0.5s;
             }
+            body.dark-theme {
+                color: #eee;
+                background-color: #121212;
+            }
+            #theme-switcher {
+                position:absolute;
+                right:0;
+                top:0;
+                padding-right: 0.25em;
+            }
+
             p {
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
             }
@@ -28,7 +42,8 @@
         </style>
 
     </head>
-    <script>
+    <script>        
+        let darkTheme = !window.matchMedia("(prefers-color-scheme: dark)").matches
         let challenges = [
             {
                 name: "Pomodoro timer",
@@ -158,12 +173,13 @@
             }
         ]
     </script>
-    <body>
+    <body data-class="dark-theme:darkTheme">
         <header>
             <img width="1200" src="images/joshua-aragon-QAdiiUo_SXQ-unsplash.jpg">Photo by <a href="https://unsplash.com/@goshua13?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Joshua Aragon</a> on <a href="https://unsplash.com/s/photos/code-christmas?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
             </img>
             <h1>Solutions for the Advent of Javascript Challenge</h1>
             <h3>Implemented with web dev framework <a href="https://reken.dev">Reken</a></h3>
+            <label id="theme-switcher"><input type="checkbox" data-value="darkTheme"/> Dark theme</label>
         </header>
         <main>
             <section>

@@ -10,28 +10,36 @@
 </head>
 
 <body>
+  <script>
+    let cardNumber = '4242 4242 4242 4242';
+    let name = 'John Doe';
+    let month = '12';
+    let year = '2022';
+    let cvv = '123';
+    let flip = false;
+  </script>
 
   <div class="wrapper">
     <!-- 👇🏻 ADD A CLASS OF FLIP 👇🏻 && 👇🏻 SWAP OUT THE DISCOVER CLASS FOR VISA OR MASTERCARD 👇🏻 -->
-    <div class="credit-card__wrapper discover">
+    <div data-class="flip;discover:cardNumber[0]=='6';american:cardNumber[0]=='3';visa:cardNumber[0]=='4';mastercard:cardNumber[0]=='5'" class="credit-card__wrapper">
       <div class="credit-card__inner">
         <div class="credit-card--front">
           <div class="card-number">
-            <div class="card-number__shadow shadow">4242 4242 4242 4242</div>
-            <div class="card-number__emboss emboss">4242 4242 4242 4242</div>
+            <div data-text="${cardNumber}" class="card-number__shadow shadow">4242 4242 4242 4242</div>
+            <div data-text="${cardNumber}" class="card-number__emboss emboss">4242 4242 4242 4242</div>
           </div>
           <div class="card-holder">
-            <div class="card-holder__shadow shadow">Amy Dutton</div>
-            <div class="card-holder__emboss emboss">Amy Dutton</div>
+            <div data-text="${name}" class="card-holder__shadow shadow">Amy Dutton</div>
+            <div data-text="${name}" class="card-holder__emboss emboss">Amy Dutton</div>
           </div>
           <div class="expiration-date">
-            <div class="expiration-date__shadow shadow">12/2022</div>
-            <div class="expiration-date__emboss emboss">12/2022</div>
+            <div data-text="${('0'+month).slice(-2)}/${year}" class="expiration-date__shadow shadow">12/2022</div>
+            <div data-text="${('0'+month).slice(-2)}/${year}" class="expiration-date__emboss emboss">12/2022</div>
           </div>
         </div>
         <div class="credit-card--back">
-          <div class="signature">Amy Dutton</div>
-          <div class="cvv">123</div>
+          <div data-text=${name} class="signature">Amy Dutton</div>
+          <div data-text=${cvv} class="cvv">123</div>
         </div>
       </div>
     </div>
@@ -41,12 +49,12 @@
         <div class="row">
           <div class="field">
             <label for="card-number">Card Number</label>
-            <input type="text" name="card-number" />
+            <input data-value="cardNumber" type="text" name="card-number" />
           </div>
 
           <div class="field">
             <label for="card-holder">Card Holder</label>
-            <input type="text" name="card-holder" />
+            <input data-value="name" type="text" name="card-holder" />
           </div>
         </div>
 
@@ -54,7 +62,7 @@
           <div class="field option__wrapper">
             <label>Expiration Date</label>
             <div class="field__option">
-              <select name="expiration-date-month" id="">
+              <select data-value="month" name="expiration-date-month" id="">
                 <option>Month</option>
                 <option value="1">01</option>
                 <option value="2">02</option>
@@ -70,7 +78,7 @@
                 <option value="12">12</option>
               </select>
 
-              <select name="expiration-date-year" id="">
+              <select data-value="year" name="expiration-date-year" id="">
                 <option>Year</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
@@ -88,7 +96,7 @@
 
           <div class="field">
             <label for="cvv">CVV</label>
-            <input type="number" name="cvv" />
+            <input data-value="cvv" data-on-focus="flip=true" data-on-blur="flip=false" type="number" name="cvv" />
           </div>
         </div>
 
@@ -99,6 +107,7 @@
     </div>
   </div>
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </body>
 
 </html>

@@ -9,12 +9,15 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
-<body>
-
+<body data-on-mousemove="if (collapsed && e.clientY < 30 && !displayed) {collapsed = false;displayed=true;}">
+  <script>
+    let collapsed = true;
+    let displayed = false;
+  </script>
   <!-- 👇🏻 ADD / REMOVE A CLASS OF COLLAPSED 👇🏻 -->
-  <div class="toaster">
+  <div data-timer="15000:!collapsed:collapsed=true;" data-class="collapsed" class="toaster collapsed">
     <div class="close">
-      <button class="close-toaster" id="closeToaster">
+      <button data-action="collapsed=true" class="close-toaster" id="closeToaster">
         <img src="./images/close.svg" alt="Close" /> Close
       </button>
     </div>
@@ -34,6 +37,7 @@
     </form>
   </div>
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </body>
 
 </html>

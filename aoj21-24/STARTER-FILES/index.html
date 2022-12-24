@@ -10,49 +10,59 @@
 </head>
 
 <body>
+  <script>
+    let oldDirection = ''
+    let oldColumn = ''
+    let sortDirection = 'a'
+    let sortColumn = 'id'
+    const PAGE_SIZE = 10
+    let page = 1;
+    let editRow = -1;
+    let filterString = ''
+  </script>
 
   <div class="wrapper">
-
+    <label><input data-on-input="filterString=e.target.value" type="search" placeholder="Type to filter"></label>
     <table cellpadding="0" cellspacing="0" width="100%">
       <thead>
         <tr>
           <th class="header__id">
             ID
             <!-- 👇🏻 ADD A CLASS OF ascending OR DESCENDING 👇🏻 -->
-            <button class="sort ascending">
+            <button data-class="ascending:sortDirection=='a'&&sortColumn=='id';descending:sortDirection=='d'&&sortColumn=='id'" class="sort ascending">
               <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path class="ascending" d="M16.9706 8.48528L8.48529 0L9.29832e-06 8.48528H16.9706Z" />
-                <path class="descending"
+                <path data-action="sortDirection='a';sortColumn='id'" class="ascending" d="M16.9706 8.48528L8.48529 0L9.29832e-06 8.48528H16.9706Z" />
+                <path data-action="sortDirection='d';sortColumn='id'" class="descending"
                   d="M1.00136e-05 12.4853L8.48529 20.9706L16.9706 12.4853L1.00136e-05 12.4853Z" />
               </svg>
             </button>
           </th>
           <th>
             Name
-            <button class="sort">
+            <button data-class="ascending:sortDirection=='a'&&sortColumn=='name';descending:sortDirection=='d'&&sortColumn=='name'" class="sort">
               <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path class="ascending" d="M16.9706 8.48528L8.48529 0L9.29832e-06 8.48528H16.9706Z" />
-                <path class="descending"
+                <path data-action="sortDirection='a';sortColumn='name'" class="ascending" d="M16.9706 8.48528L8.48529 0L9.29832e-06 8.48528H16.9706Z" />
+                <path data-action="sortDirection='d';sortColumn='name'" class="descending"
                   d="M1.00136e-05 12.4853L8.48529 20.9706L16.9706 12.4853L1.00136e-05 12.4853Z" />
               </svg>
             </button>
           </th>
           <th>
             Email Address
-            <button class="sort">
+            <button  data-class="ascending:sortDirection=='a'&&sortColumn=='email';descending:sortDirection=='d'&&sortColumn=='email'" class="sort">
               <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path class="ascending" d="M16.9706 8.48528L8.48529 0L9.29832e-06 8.48528H16.9706Z" />
-                <path class="descending"
+                <path data-action="sortDirection='a';sortColumn='email'" class="ascending" d="M16.9706 8.48528L8.48529 0L9.29832e-06 8.48528H16.9706Z" />
+                <path data-action="sortDirection='d';sortColumn='email'" class="descending"
                   d="M1.00136e-05 12.4853L8.48529 20.9706L16.9706 12.4853L1.00136e-05 12.4853Z" />
               </svg>
             </button>
           </th>
           <th>
             Job Title
-            <button class="sort">
+            <button  data-class="ascending:sortDirection=='a'&&sortColumn=='title';descending:sortDirection=='d'&&sortColumn=='title'" class="sort">
               <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path class="ascending" d="M16.9706 8.48528L8.48529 0L9.29832e-06 8.48528H16.9706Z" />
-                <path class="descending"
+                <path data-action="sortDirection='a';sortColumn='title'" class="ascending" d="M16.9706 8.48528L8.48529 0L9.29832e-06 8.48528H16.9706Z" />
+                <path data-action="sortDirection='d';sortColumn='title'" class="descending"
                   d="M1.00136e-05 12.4853L8.48529 20.9706L16.9706 12.4853L1.00136e-05 12.4853Z" />
               </svg>
             </button>
@@ -61,237 +71,47 @@
         </tr>
       </thead>
 
-      <tbody>
+      <tbody data-for="r:fdata.slice((page-1)*PAGE_SIZE,(page-1)*PAGE_SIZE+PAGE_SIZE)">
         <!-- 👇🏻 ADD A CLASS OF EDIT, IF YOU TO DISPLAY THE FORM FIELDS 👇🏻 -->
-        <tr>
-          <td>1</td>
+        <tr data-class="edit:editRow==r.index">
+          <td data-text="${r.item.id}">1</td>
           <td class="name">
-            <input type="text" disabled="disabled" name="person-name-1" value="Cameron Williamson" />
+            <input data-value="r.item.name" type="text" data-arr-disabled="editRow!=r.index" name="person-name-1"  />
           </td>
           <td>
-            <input type="text" disabled="disabled" name="person-email-1" value="cameron.williams@example.com" />
+            <input data-value="r.item.email" type="text" data-arr-disabled="editRow!=r.index" name="person-email-1" />
           </td>
           <td>
-            <input type="text" disabled="disabled" name="person-title-1" value="Software Developer" />
+            <input data-value="r.item.title" type="text" data-arr-disabled="editRow!=r.index" name="person-title-1" />
           </td>
           <td>
-            <button class="update" name="person-update-1" id="personUpdate1">
+            <button data-action="editRow=-1" class="update" name="person-update-1" id="personUpdate1">
               <img src="./images/update.svg" alt="Update" class="update" />
             </button>
-            <button class="edit" name="person-edit-1" id="personEdit1">
+            <button data-action="editRow=r.index" class="edit" name="person-edit-1" id="personEdit1">
               <img src="./images/edit.svg" alt="Edit" class="edit" />
             </button>
           </td>
         </tr>
-
-        <tr>
-          <td>1</td>
-          <td class="name">
-            <input type="text" disabled="disabled" name="person-name-1" value="Cameron Williamson" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-email-1" value="cameron.williams@example.com" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-title-1" value="Software Developer" />
-          </td>
-          <td>
-            <button class="update" name="person-update-1" id="personUpdate1">
-              <img src="./images/update.svg" alt="Update" class="update" />
-            </button>
-            <button class="edit" name="person-edit-1" id="personEdit1">
-              <img src="./images/edit.svg" alt="Edit" class="edit" />
-            </button>
-          </td>
-        </tr>
-
-        <tr>
-          <td>1</td>
-          <td class="name">
-            <input type="text" disabled="disabled" name="person-name-1" value="Cameron Williamson" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-email-1" value="cameron.williams@example.com" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-title-1" value="Software Developer" />
-          </td>
-          <td>
-            <button class="update" name="person-update-1" id="personUpdate1">
-              <img src="./images/update.svg" alt="Update" class="update" />
-            </button>
-            <button class="edit" name="person-edit-1" id="personEdit1">
-              <img src="./images/edit.svg" alt="Edit" class="edit" />
-            </button>
-          </td>
-        </tr>
-
-        <tr>
-          <td>1</td>
-          <td class="name">
-            <input type="text" disabled="disabled" name="person-name-1" value="Cameron Williamson" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-email-1" value="cameron.williams@example.com" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-title-1" value="Software Developer" />
-          </td>
-          <td>
-            <button class="update" name="person-update-1" id="personUpdate1">
-              <img src="./images/update.svg" alt="Update" class="update" />
-            </button>
-            <button class="edit" name="person-edit-1" id="personEdit1">
-              <img src="./images/edit.svg" alt="Edit" class="edit" />
-            </button>
-          </td>
-        </tr>
-
-        <tr>
-          <td>1</td>
-          <td class="name">
-            <input type="text" disabled="disabled" name="person-name-1" value="Cameron Williamson" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-email-1" value="cameron.williams@example.com" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-title-1" value="Software Developer" />
-          </td>
-          <td>
-            <button class="update" name="person-update-1" id="personUpdate1">
-              <img src="./images/update.svg" alt="Update" class="update" />
-            </button>
-            <button class="edit" name="person-edit-1" id="personEdit1">
-              <img src="./images/edit.svg" alt="Edit" class="edit" />
-            </button>
-          </td>
-        </tr>
-
-        <tr>
-          <td>1</td>
-          <td class="name">
-            <input type="text" disabled="disabled" name="person-name-1" value="Cameron Williamson" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-email-1" value="cameron.williams@example.com" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-title-1" value="Software Developer" />
-          </td>
-          <td>
-            <button class="update" name="person-update-1" id="personUpdate1">
-              <img src="./images/update.svg" alt="Update" class="update" />
-            </button>
-            <button class="edit" name="person-edit-1" id="personEdit1">
-              <img src="./images/edit.svg" alt="Edit" class="edit" />
-            </button>
-          </td>
-        </tr>
-
-        <tr>
-          <td>1</td>
-          <td class="name">
-            <input type="text" disabled="disabled" name="person-name-1" value="Cameron Williamson" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-email-1" value="cameron.williams@example.com" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-title-1" value="Software Developer" />
-          </td>
-          <td>
-            <button class="update" name="person-update-1" id="personUpdate1">
-              <img src="./images/update.svg" alt="Update" class="update" />
-            </button>
-            <button class="edit" name="person-edit-1" id="personEdit1">
-              <img src="./images/edit.svg" alt="Edit" class="edit" />
-            </button>
-          </td>
-        </tr>
-
-        <tr>
-          <td>1</td>
-          <td class="name">
-            <input type="text" disabled="disabled" name="person-name-1" value="Cameron Williamson" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-email-1" value="cameron.williams@example.com" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-title-1" value="Software Developer" />
-          </td>
-          <td>
-            <button class="update" name="person-update-1" id="personUpdate1">
-              <img src="./images/update.svg" alt="Update" class="update" />
-            </button>
-            <button class="edit" name="person-edit-1" id="personEdit1">
-              <img src="./images/edit.svg" alt="Edit" class="edit" />
-            </button>
-          </td>
-        </tr>
-
-        <tr>
-          <td>1</td>
-          <td class="name">
-            <input type="text" disabled="disabled" name="person-name-1" value="Cameron Williamson" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-email-1" value="cameron.williams@example.com" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-title-1" value="Software Developer" />
-          </td>
-          <td>
-            <button class="update" name="person-update-1" id="personUpdate1">
-              <img src="./images/update.svg" alt="Update" class="update" />
-            </button>
-            <button class="edit" name="person-edit-1" id="personEdit1">
-              <img src="./images/edit.svg" alt="Edit" class="edit" />
-            </button>
-          </td>
-        </tr>
-
-        <tr class="edit">
-          <td>1</td>
-          <td class="name">
-            <input type="text" disabled="disabled" name="person-name-1" value="Cameron Williamson" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-email-1" value="cameron.williams@example.com" />
-          </td>
-          <td>
-            <input type="text" disabled="disabled" name="person-title-1" value="Software Developer" />
-          </td>
-          <td>
-            <button class="update" name="person-update-1" id="personUpdate1">
-              <img src="./images/update.svg" alt="Update" class="update" />
-            </button>
-            <button class="edit" name="person-edit-1" id="personEdit1">
-              <img src="./images/edit.svg" alt="Edit" class="edit" />
-            </button>
-          </td>
-        </tr>
-
       </tbody>
 
       <tfoot>
         <tr>
-          <td colspan="2">
+          <td data-text="${fdata.length} Results" colspan="2">
             30 Results
           </td>
           <td colspan="3">
             <div class="pagination edit">
-              <button class="previous" id="previous">
+              <button data-action="if(page>1)page--" class="previous" id="previous">
                 <img src="./images/chevron--left.svg" alt="Previous" />
               </button>
 
-              <input type="text" name="currentPage" value="1" id="currentPage" />
+              <input data-value="page" type="text" name="currentPage" id="currentPage" />
 
               <span>&nbsp;of&nbsp;</span>
-              <span id="totalPages">3</span>
+              <span data-text="${Math.ceil(fdata.length/PAGE_SIZE)}" id="totalPages"></span>
 
-              <button class="next" id="next">
+              <button data-action="if(page<fdata.length/PAGE_SIZE)page++" class="next" id="next">
                 <img src="./images/chevron--right.svg" alt="Next" />
               </button>
             </div>
@@ -302,6 +122,28 @@
 
   </div>
   <script src="app.js"></script>
-</body>
+  <script data-calc>
+    if (filterString!='') {
+      let filter = filterString.toLowerCase();
+      fdata = data.filter((item=>item.name.toLowerCase().indexOf(filter)>=0||item.email.toLowerCase().indexOf(filter)>=0||item.title.toLowerCase().indexOf(filter)>=0));
+    }
+    else
+      fdata = data;
+    
+    if (sortDirection!=oldDirection||sortColumn!=oldColumn) {
+      fdata.sort((personA, personB) => {
+        const a = personA[sortColumn]
+        const b = personB[sortColumn]
+        if (sortDirection === 'a')
+          return a>b?1:a==b?0:-1;
+        else 
+          return a<b?1:a==b?0:-1;
+      })
+      oldDirection = sortDirection;
+      oldColumn = oldColumn;
+    }
+  </script>
 
+</body>
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
 </html>

@@ -52,14 +52,12 @@
     <div class="expenses-panel">
       <h2>Expenses</h2>
       <div data-for="expense:expenseList" class="expense-table">
-        <div>
-          <div data-text="${expense.item.name}">Starbucks</div>
-          <div data-text="${numberFormat(expense.item.expense)}">$5.54</div>
-          <div class="delete">
-            <button data-action="expenseList.splice(expense.index, 1);" name="delete-expense" class="delete-expense">
-              <img src="./images/trash.svg" alt="Tash" />
-            </button>
-          </div>
+        <div data-text="${expense.item.name}">Starbucks</div>
+        <div data-text="${numberFormat(expense.item.expense)}">$5.54</div>
+        <div class="delete">
+          <button data-action="expenseList.splice(expense.index, 1);" name="delete-expense" class="delete-expense">
+            <img src="./images/trash.svg" alt="Tash" />
+          </button>
         </div>
       </div>
     </div>
@@ -85,6 +83,6 @@
   </div>
 
 </body>
-<script src="https://cdn.jsdelivr.net/gh/hbroek/reken/dist/reken.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hbroek/reken@0.7.4/dist/reken.min.js"></script>
 
 </html>
